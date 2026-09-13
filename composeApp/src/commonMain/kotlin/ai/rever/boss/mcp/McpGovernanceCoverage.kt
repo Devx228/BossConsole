@@ -7,6 +7,8 @@ package ai.rever.boss.mcp
  * [McpToolRegistryCore.invoke], and that function opens by looking the tool up in
  * the registry. A tool the registry does not own cannot be governed by it, cannot
  * be refused by it, and never appears in the ledger. It simply never arrives.
+ * The registry's per-tool kill-switch, search inventory and permission filter also
+ * apply only to registry-contributed tools.
  *
  * The MCP server an agent attaches to is BossTerm's, and terminal-tab assembles it
  * from three sources, only one of which is the registry:
@@ -35,7 +37,7 @@ object McpGovernanceCoverage {
      * outside everything in this package.
      *
      * Derived by elimination rather than by reading BossTerm, which is a bundled
-     * library: none of these is defined anywhere in this repository, and none is in
+     * library: no MCP tool with these names is defined in this repository, and none is in
      * terminal-tab's `bossHostMcpToolDefs` except where noted, which leaves
      * BossTerm's own server as the only source. If that is wrong for any entry, the
      * entry is wrong and this set is the one place to correct it.

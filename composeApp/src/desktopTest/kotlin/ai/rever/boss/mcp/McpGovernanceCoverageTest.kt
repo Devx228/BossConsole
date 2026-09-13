@@ -54,7 +54,7 @@ class McpGovernanceCoverageTest {
 
     @Test
     fun `the client-side prefix is stripped before the verdict`() {
-        // DefaultMcpRiskEvaluator normalises the same way. Two answers for one tool,
+        // DefaultMcpRiskEvaluator also strips this boss prefix. Two answers for one tool,
         // depending on whether the caller had already stripped the prefix, would be
         // worse than no answer.
         assertFalse(McpGovernanceCoverage.isEnforceable("mcp__boss__run_command"))
@@ -151,5 +151,12 @@ class McpGovernanceCoverageTest {
         // the server these tools come from, so it is the likeliest prefix to meet them under.
         assertFalse(McpGovernanceCoverage.isEnforceable("mcp__bossterm__run_command"))
         assertTrue(McpGovernanceCoverage.isEnforceable("mcp__bossterm__k8s_exec"))
+    }
+
+    @Test
+    fun `the README terminal examples are all outside registry governance`() {
+        listOf("run_command", "run_in_sidebar", "run_in_panel", "list_tabs", "read_scrollback", "send_input").forEach {
+            assertFalse(McpGovernanceCoverage.isEnforceable(it), it)
+        }
     }
 }

@@ -63,8 +63,8 @@ object McpMutatingToolCatalog {
      * Naming a tool here classifies it. It does not establish that a decision about
      * it can be enforced: four of these are served outside the host registry, and the
      * gate that consults this set only ever sees registry tools. "Outside the host
-     * registry" rather than "by BossTerm" because the two are not the same: two of the
-     * four come from terminal-tab's own `additionalTools`, as
+     * registry" rather than "by BossTerm" because the two are not the same: `run_in_sidebar` comes
+     * from terminal-tab's own `additionalTools`, as
      * [McpGovernanceCoverage.EXTERNALLY_SERVED_TOOLS] records, so naming one source
      * would go stale the moment the split shifts. [McpGovernanceCoverage] is where that distinction lives, and
      * `McpGovernanceCoverageTest` fails if a name is added here without being
