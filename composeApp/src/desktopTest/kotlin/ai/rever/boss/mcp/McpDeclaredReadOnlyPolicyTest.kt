@@ -154,4 +154,15 @@ class McpDeclaredReadOnlyPolicyTest {
             McpMutatingToolCatalog.resolveAction("git_push", ruled, declaredReadOnly = false),
         )
     }
+
+    @Test
+    fun `a declaration respects a hardened mutating default and an explicit allow still wins`() {
+        val file = createTempPolicyFile()
+        file.writeText("""{"defaultMutatingAction":"DENY"}""")
+        val engine = McpPolicyEngine(policyFile = file)
+        assertEquals(McpPolicyAction.ALLOW, engine.policyFor("send_email"))
+        assertEquals(McpPolicyAction.DENY, engine.policyFor("send_email", declaredReadOnly = false))
+        assertTrue(engine.setToolPolicy("send_email", McpPolicyAction.ALLOW))
+        assertEquals(McpPolicyAction.ALLOW, engine.policyFor("send_email", declaredReadOnly = false))
+    }
 }

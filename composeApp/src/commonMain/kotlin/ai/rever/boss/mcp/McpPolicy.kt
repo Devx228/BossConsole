@@ -139,6 +139,10 @@ object McpMutatingToolCatalog {
      *   saying nothing at all. The name heuristic still applies, and nothing the catalog
      *   already catches is weakened.
      *
+     * The declaration selects the configured defaultMutatingAction, not a fixed ASK.
+     * A hardened DENY default rejects the tool without a prompt; an explicit operator
+     * rule still wins. Recovering from a default DENY requires editing the policy file.
+     *
      * The composition is therefore fail-safe in both directions: mutating if the tool says
      * so, or if its name says so.
      */
